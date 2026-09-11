@@ -18,5 +18,16 @@ assert.equal(run('journeyCount()'),1,'Replaying completed stage cannot unlock tw
 run("page='library';filter='Coragem';query=''");assert(run('content()').includes('Pequeno pastor'));assert(!run('content()').includes('data-story="noah"'));
 run("filter='Todas';query='ceu'");assert(run('content()').includes('Um céu de agradecimentos'));
 run("page='journey';query='';monthOffset=-1");assert(run('calendar()').includes('calendar-grid'));
-const themeButton={dataset:{},hasAttribute:a=>a==='data-theme'};elements.app.listeners.click({target:{closest:()=>themeButton}});assert.equal(document.documentElement.dataset.theme,'dark');assert.equal(JSON.parse(storage['sementinha-theme']),'dark');
+const themeToggle={...base(),dataset:{},hasAttribute:a=>a==='data-toggle-theme'};
+document.documentElement.innerHTML='APP ROOT MUST SURVIVE';
+document.querySelectorAll=selector=>selector==='[data-theme]'?[document.documentElement]:selector==='button[data-toggle-theme]'?[themeToggle]:[];
+const appBefore=elements.app.innerHTML;
+for(const expected of ['dark','light','dark']){
+ elements.app.listeners.click({target:{closest:()=>themeToggle}});
+ assert.equal(document.documentElement.dataset.theme,expected);
+ assert.equal(JSON.parse(storage['sementinha-theme']),expected);
+ assert.equal(document.documentElement.innerHTML,'APP ROOT MUST SURVIVE');
+ assert.equal(elements.app.innerHTML,appBefore);
+ assert(themeToggle.innerHTML.includes('<svg'));
+}
 console.log('PASS: six stages, unlock order, seek protection, completion, duplicate protection, listening days, persistence, search, category, calendar, theme, animated player.');
