@@ -1,4 +1,4 @@
-# Sementinha
+# Sementinha da Fé
 Aplicativo web estático de histórias infantis cristãs, em português. Interface responsiva, quatro ilustrações originais, mapa de seis etapas, calendário de escuta, temas claro e escuro, biblioteca por categoria, busca, favoritos locais, player contínuo e expandido, velocidade, volume e temporizador.
 
 ## Executar

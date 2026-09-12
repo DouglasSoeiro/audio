@@ -1,0 +1,93 @@
+/* Sementinha: biblioteca de histórias (cabeçalho, filtros, grupos, cards) e o card "Continue ouvindo". Dona única das regras .lb-*. */
+
+/* Cabeçalho da página */
+.lb-intro{margin:14px 0 18px}
+.lb-kicker{display:inline-flex;align-items:center;gap:7px;color:var(--gold);font-size:13px;font-weight:800;margin-bottom:8px}
+.lb-kicker svg{width:17px;height:17px;color:var(--aqua)}
+.lb-intro h1{font-size:clamp(26px,7.4vw,40px);line-height:1.06;font-weight:900;letter-spacing:-.7px;color:var(--ink)}
+.lb-intro h1 span{color:var(--aqua)}
+.lb-intro p{margin-top:10px;font-size:15px;line-height:1.5;color:var(--muted);max-width:34ch}
+
+/* Filtros: fila rolável de pílulas; a ativa ganha a cor do seu jardim. */
+.lb-filters{display:flex;gap:8px;overflow-x:auto;margin:0 0 22px;padding:2px 0 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.lb-filters::-webkit-scrollbar{display:none}
+@media(max-width:760px){.lb-filters{margin-left:-20px;margin-right:-20px;padding-left:20px;padding-right:20px}}
+.lb-chip{--chip:var(--aqua);flex:none;display:inline-flex;align-items:center;gap:7px;padding:10px 15px;border-radius:30px;background:oklch(1 0 0 / .1);border:1px solid oklch(1 0 0 / .14);color:var(--ink);font-size:13.5px;font-weight:700;white-space:nowrap;transition:background .2s,color .2s,transform .2s}
+.lb-chip svg{width:17px;height:17px}
+.lb-chip:hover{background:oklch(1 0 0 / .18)}
+.lb-chip.active{background:var(--chip);border-color:transparent;color:var(--deep-violet);box-shadow:0 3px 0 oklch(.2 .12 298 / .3)}
+.lb-chip--gold{--chip:var(--gold)}
+.lb-chip--aqua{--chip:var(--aqua)}
+.lb-chip--pink{--chip:oklch(.8 .14 350)}
+.lb-chip--lilac{--chip:oklch(.84 .1 295)}
+.lb-chip--coral{--chip:oklch(.85 .11 55)}
+
+/* Grupos por jardim */
+.lb-group{margin-bottom:26px}
+.lb-group-head{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.lb-group-head h2{font-family:'Nunito',sans-serif;font-size:21px;font-weight:900;letter-spacing:-.3px;color:var(--ink);flex:1;min-width:0}
+.lb-group-num{font-size:12px;font-weight:800;color:var(--gold);white-space:nowrap}
+.lb-group-num:empty{display:none}
+.lb-group-head small{font-size:12.5px;font-weight:600;color:var(--muted);white-space:nowrap}
+
+/* Grade de cards: duas colunas no celular, mais conforme a largura. */
+.lb-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}
+@media(min-width:600px){.lb-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 16px}}
+@media(min-width:1000px){.lb-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 18px}}
+@media(min-width:1400px){.lb-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+
+/* Card: capa quadrada com número do jardim, aviso de áudio e play; título embaixo. */
+.lb-card{--tint:var(--aqua);display:block;text-align:left;min-width:0;padding:0;transition:transform .2s}
+.lb-card:hover{transform:translateY(-3px)}
+.lb-card:active{transform:scale(.98)}
+.lb-card--gold{--tint:var(--gold)}
+.lb-card--aqua{--tint:var(--aqua)}
+.lb-card--pink{--tint:oklch(.82 .13 350)}
+.lb-card--lilac{--tint:oklch(.86 .09 295)}
+.lb-card--coral{--tint:oklch(.87 .1 55)}
+.lb-cover{position:relative;display:block;aspect-ratio:1;border-radius:20px;overflow:hidden;background:oklch(1 0 0 / .1);box-shadow:0 12px 26px -16px oklch(.1 .07 298 / .9);isolation:isolate}
+.lb-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.lb-card:hover .lb-cover img{transform:scale(1.05)}
+.lb-num{position:absolute;top:9px;left:9px;z-index:1;display:grid;place-items:center;min-width:30px;height:30px;padding:0 7px;border-radius:15px;background:var(--tint);color:var(--deep-violet);font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;box-shadow:0 3px 8px -3px oklch(.1 .07 298 / .6)}
+.lb-soon{position:absolute;top:9px;right:9px;z-index:1;display:inline-flex;align-items:center;gap:4px;padding:5px 8px;border-radius:20px;background:oklch(.2 .1 298 / .72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:oklch(.95 .02 300);font-size:11px;font-weight:700}
+.lb-soon svg{width:12px;height:12px;stroke-width:2.4}
+.lb-play{position:absolute;right:9px;bottom:9px;z-index:1;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--pink);color:white;box-shadow:0 5px 0 oklch(.4 .17 345),0 10px 18px -8px oklch(.1 .07 298 / .9)}
+.lb-play svg{width:17px;height:17px;margin-left:2px}
+.lb-body{display:block;padding:10px 4px 0}
+.lb-body strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-family:'Nunito',sans-serif;font-size:15px;line-height:1.25;font-weight:800;color:var(--ink);letter-spacing:-.2px}
+.lb-body small{display:block;margin-top:4px;font-size:12px;color:var(--muted)}
+.lb-body small i{font-style:normal;color:var(--tint)}
+
+/* Estado vazio (favoritas / busca) */
+.lb-empty{padding:48px 22px;border-radius:22px;background:var(--deep-violet);text-align:center}
+.lb-empty svg{width:38px;height:38px;color:var(--aqua);margin-bottom:12px}
+.lb-empty h3{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;margin-bottom:8px;color:var(--ink)}
+.lb-empty p{color:var(--muted);line-height:1.55;margin-bottom:18px}
+
+/* Continue ouvindo: card com um brilho discreto para se destacar dos demais. */
+.lb-continue{position:relative;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;width:100%;margin:0 0 30px;padding:14px;border-radius:24px;text-align:left;background:linear-gradient(120deg,var(--deep-violet),oklch(.33 .15 318));box-shadow:0 18px 40px -24px oklch(.55 .22 345 / .7),inset 0 1px 0 oklch(1 0 0 / .08)}
+.lb-continue::before{content:'';position:absolute;inset:0;border-radius:24px;padding:1px;background:linear-gradient(120deg,oklch(.86 .13 185 / .6),oklch(1 0 0 / .1) 45%,oklch(.6 .22 345 / .55));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.lb-continue-cover{position:relative;width:104px;height:104px;border-radius:18px;overflow:hidden;padding:0;display:block;box-shadow:0 10px 22px -12px oklch(.1 .07 298)}
+.lb-continue-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.lb-continue-cover svg{position:absolute;right:7px;bottom:7px;width:30px;height:30px;padding:7px;border-radius:50%;background:var(--pink);color:white;box-sizing:border-box}
+.lb-continue-body{min-width:0}
+.lb-kicker--live{color:var(--aqua);margin-bottom:5px}
+.lb-kicker--live i{width:8px;height:8px;border-radius:50%;background:var(--aqua)}
+@media(prefers-reduced-motion:no-preference){.lb-kicker--live i{animation:lb-pulse 1.8s ease-out infinite}}
+@keyframes lb-pulse{0%{box-shadow:0 0 0 0 oklch(.86 .13 185 / .6)}100%{box-shadow:0 0 0 9px oklch(.86 .13 185 / 0)}}
+.lb-continue h2{font-family:'Nunito',sans-serif;font-size:20px;line-height:1.15;font-weight:900;letter-spacing:-.3px;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.lb-continue p{margin:5px 0 10px;font-size:12.5px;color:var(--muted)}
+.lb-continue p i{font-style:normal;color:var(--aqua)}
+.lb-continue .primary{display:inline-flex;align-items:center;gap:7px;padding:10px 16px;border-radius:30px;background:var(--pink);color:white;font-size:13.5px;font-weight:800;box-shadow:0 4px 0 oklch(.4 .17 345);transition:transform .12s,box-shadow .12s}
+.lb-continue .primary:active{transform:translateY(3px);box-shadow:0 1px 0 oklch(.4 .17 345)}
+.lb-continue .primary svg{width:15px;height:15px}
+.lb-continue--start{grid-template-columns:1fr auto;cursor:pointer}
+.lb-continue--start>svg{width:64px;height:64px;color:var(--aqua);opacity:.9}
+.lb-continue--start .primary{margin-top:2px}
+@media(min-width:600px){.lb-continue{padding:18px;gap:20px}.lb-continue-cover{width:132px;height:132px}.lb-continue h2{font-size:24px}.lb-continue p{font-size:13.5px}}
+
+.lb-home-all{margin-top:4px}
+.lb-home-all>.lb-group-head{flex-direction:column;align-items:flex-start;gap:4px;margin-bottom:16px}
+.lb-home-all>.lb-group-head h2{font-size:24px}
+
+.lb-intro :focus-visible,.lb-filters :focus-visible,.lb-grid :focus-visible,.lb-continue:focus-visible,.lb-continue :focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}

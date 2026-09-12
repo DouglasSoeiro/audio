@@ -1,4 +1,4 @@
-# Sementinha
+# Sementinha da Fé
 ## Register
 product
 ## Platform
