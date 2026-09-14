@@ -1,9 +1,7 @@
 # Áudios das histórias
 
-O catálogo completo já está em `../story-catalog.js`. Quando cada gravação ficar pronta:
+As 40 narrações finais ficam em `audio/`, separadas por módulo. São MP3 mono de 44,1 kHz e 128 kbps, convertidos diretamente das fontes WAV da Cartesia.
 
-1. coloque o arquivo `.m4a` nesta pasta;
-2. use o ID correspondente do catálogo, por exemplo `roteiro-criacao.m4a`;
-3. preencha o campo `audio` da história com esse nome em `story-catalog.js`.
+Cada vínculo está declarado explicitamente em `../story-catalog.js`. Execute `node scripts/verify-audio-catalog.cjs` na raiz do projeto para verificar títulos, numeração, módulos, exclusividade e existência dos arquivos.
 
-Os seis arquivos atuais (`noah.m4a`, `night.m4a`, `david.m4a`, `promise.m4a`, `shepherd.m4a` e `thanks.m4a`) continuam sendo as narrações demonstrativas da jornada inicial.
+Os seis arquivos `.m4a` nesta pasta são apenas legados da primeira demonstração e não são usados pelo catálogo atual.

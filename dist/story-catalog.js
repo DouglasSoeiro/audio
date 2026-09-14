@@ -42,4 +42,46 @@ window.STORY_CATALOG = [
   ['galinha-ouro','A Galinha dos Ovos de Ouro','Paciência e cuidado protegem aquilo que é precioso.','Fé e Valores','Fábula tradicional']
 ].map(([id,title,description,category,ref], index) => ({id:`roteiro-${id}`,title,subtitle:category,description,category,ref,age:'4–8 anos',tag:'Áudio em preparação',image:['noah-ark','david-shepherd','jesus-night'][index%3],audio:null,catalogOnly:true}));
 const GENERATED_COVERS=new Map([['criacao','roteiro-criacao'],['noah','roteiro-noah'],['abraao','roteiro-abraao'],['jose-do-egito','roteiro-jose-do-egito'],['moises','roteiro-moises'],['davi-golias','roteiro-davi-golias'],['jonas','roteiro-jonas'],['daniel','roteiro-daniel'],['nascimento','roteiro-nascimento'],['batismo','roteiro-batismo'],['discipulos','roteiro-discipulos'],['primeiro-milagre','roteiro-primeiro-milagre'],['tempestade','roteiro-tempestade'],['paes-peixes','roteiro-paes-peixes'],['zaqueu','roteiro-zaqueu'],['ressurreicao','roteiro-ressurreicao'],['samaritano','roteiro-samaritano'],['filho-prodigo','roteiro-filho-prodigo'],['ovelha-perdida','roteiro-ovelha-perdida'],['semeador','roteiro-semeador'],['casa-rocha','roteiro-casa-rocha'],['talentos','roteiro-talentos'],['grao-mostarda','roteiro-grao-mostarda'],['servo-perdao','roteiro-servo-perdao'],['espirito-santo','roteiro-espirito-santo'],['pedro-andar','roteiro-pedro-andar'],['autoridades','roteiro-autoridades'],['saulo','roteiro-saulo'],['filipe-etiope','roteiro-filipe-etiope'],['pedro-prisao','roteiro-pedro-prisao'],['paulo-silas','roteiro-paulo-silas'],['naufragio','roteiro-naufragio'],['leao-rato','roteiro-leao-rato'],['lebre-tartaruga','roteiro-lebre-tartaruga'],['menino-lobo','roteiro-menino-lobo'],['formiga-pomba','roteiro-formiga-pomba'],['vento-sol','roteiro-vento-sol'],['feixe-varas','roteiro-feixe-varas'],['cao-sombra','roteiro-cao-sombra'],['galinha-ouro','roteiro-galinha-ouro']]);
-window.STORY_CATALOG=window.STORY_CATALOG.map((story,index)=>({...story,image:GENERATED_COVERS.get(story.id.replace('roteiro-',''))||['noah-ark','david-shepherd','jesus-night'][index%3]}));
+const STORY_AUDIO=new Map([
+  ['roteiro-criacao','/assets/audio/01-antigo-testamento/01-a-criacao-do-mundo.mp3'],
+  ['roteiro-noah','/assets/audio/01-antigo-testamento/02-noe-e-a-grande-arca.mp3'],
+  ['roteiro-abraao','/assets/audio/01-antigo-testamento/03-abraao-e-a-promessa-de-deus.mp3'],
+  ['roteiro-jose-do-egito','/assets/audio/01-antigo-testamento/04-jose-do-egito.mp3'],
+  ['roteiro-moises','/assets/audio/01-antigo-testamento/05-moises-e-a-travessia-do-mar-vermelho.mp3'],
+  ['roteiro-davi-golias','/assets/audio/01-antigo-testamento/06-davi-e-golias.mp3'],
+  ['roteiro-jonas','/assets/audio/01-antigo-testamento/07-jonas-e-o-grande-peixe.mp3'],
+  ['roteiro-daniel','/assets/audio/01-antigo-testamento/08-daniel-na-cova-dos-leoes.mp3'],
+  ['roteiro-nascimento','/assets/audio/02-vida-de-jesus/09-o-nascimento-de-jesus.mp3'],
+  ['roteiro-batismo','/assets/audio/02-vida-de-jesus/10-o-batismo-de-jesus.mp3'],
+  ['roteiro-discipulos','/assets/audio/02-vida-de-jesus/11-jesus-chama-seus-primeiros-discipulos.mp3'],
+  ['roteiro-primeiro-milagre','/assets/audio/02-vida-de-jesus/12-o-primeiro-milagre-de-jesus.mp3'],
+  ['roteiro-tempestade','/assets/audio/02-vida-de-jesus/13-jesus-acalma-a-tempestade.mp3'],
+  ['roteiro-paes-peixes','/assets/audio/02-vida-de-jesus/14-a-multiplicacao-dos-paes-e-peixes.mp3'],
+  ['roteiro-zaqueu','/assets/audio/02-vida-de-jesus/15-jesus-e-zaqueu.mp3'],
+  ['roteiro-ressurreicao','/assets/audio/02-vida-de-jesus/16-jesus-ressuscitou.mp3'],
+  ['roteiro-samaritano','/assets/audio/03-parabolas-de-jesus/17-o-bom-samaritano.mp3'],
+  ['roteiro-filho-prodigo','/assets/audio/03-parabolas-de-jesus/18-o-filho-prodigo.mp3'],
+  ['roteiro-ovelha-perdida','/assets/audio/03-parabolas-de-jesus/19-a-ovelha-perdida.mp3'],
+  ['roteiro-semeador','/assets/audio/03-parabolas-de-jesus/20-o-semeador.mp3'],
+  ['roteiro-casa-rocha','/assets/audio/03-parabolas-de-jesus/21-a-casa-sobre-a-rocha.mp3'],
+  ['roteiro-talentos','/assets/audio/03-parabolas-de-jesus/22-a-parabola-dos-talentos.mp3'],
+  ['roteiro-grao-mostarda','/assets/audio/03-parabolas-de-jesus/23-o-grao-de-mostarda.mp3'],
+  ['roteiro-servo-perdao','/assets/audio/03-parabolas-de-jesus/24-o-servo-que-nao-quis-perdoar.mp3'],
+  ['roteiro-espirito-santo','/assets/audio/04-depois-de-jesus/25-a-vinda-do-espirito-santo.mp3'],
+  ['roteiro-pedro-andar','/assets/audio/04-depois-de-jesus/26-pedro-e-o-homem-que-voltou-a-andar.mp3'],
+  ['roteiro-autoridades','/assets/audio/04-depois-de-jesus/27-pedro-e-joao-diante-das-autoridades.mp3'],
+  ['roteiro-saulo','/assets/audio/04-depois-de-jesus/28-a-conversao-de-saulo.mp3'],
+  ['roteiro-filipe-etiope','/assets/audio/04-depois-de-jesus/29-filipe-e-o-viajante-etiope.mp3'],
+  ['roteiro-pedro-prisao','/assets/audio/04-depois-de-jesus/30-pedro-e-libertado-da-prisao.mp3'],
+  ['roteiro-paulo-silas','/assets/audio/04-depois-de-jesus/31-paulo-e-silas-cantam-na-prisao.mp3'],
+  ['roteiro-naufragio','/assets/audio/04-depois-de-jesus/32-paulo-e-o-grande-naufragio.mp3'],
+  ['roteiro-leao-rato','/assets/audio/05-fe-e-valores/33-o-leao-e-o-rato.mp3'],
+  ['roteiro-lebre-tartaruga','/assets/audio/05-fe-e-valores/34-a-lebre-e-a-tartaruga.mp3'],
+  ['roteiro-menino-lobo','/assets/audio/05-fe-e-valores/35-o-menino-que-gritou-lobo.mp3'],
+  ['roteiro-formiga-pomba','/assets/audio/05-fe-e-valores/36-a-formiga-e-a-pomba.mp3'],
+  ['roteiro-vento-sol','/assets/audio/05-fe-e-valores/37-o-vento-e-o-sol.mp3'],
+  ['roteiro-feixe-varas','/assets/audio/05-fe-e-valores/38-o-feixe-de-varas.mp3'],
+  ['roteiro-cao-sombra','/assets/audio/05-fe-e-valores/39-o-cao-e-sua-sombra.mp3'],
+  ['roteiro-galinha-ouro','/assets/audio/05-fe-e-valores/40-a-galinha-dos-ovos-de-ouro.mp3']
+]);
+window.STORY_CATALOG=window.STORY_CATALOG.map((story,index)=>({...story,image:GENERATED_COVERS.get(story.id.replace('roteiro-',''))||['noah-ark','david-shepherd','jesus-night'][index%3],audio:STORY_AUDIO.get(story.id)||null,tag:STORY_AUDIO.has(story.id)?'Narração completa':story.tag}));
