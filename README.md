@@ -2,7 +2,9 @@
 Aplicativo web estático de histórias infantis cristãs, em português. Interface responsiva, jornada de 40 histórias em cinco jardins, calendário de escuta, temas claro e escuro, biblioteca por categoria, busca, favoritos locais, player contínuo e expandido, velocidade, volume e temporizador.
 
 ## Executar
-`python3 -m http.server 4173 --directory dist`
+`node scripts/serve.cjs`
+
+O servidor local aceita requisições parciais de áudio (`Range`), necessárias para que a barra de reprodução e os botões de avançar/voltar funcionem corretamente no navegador.
 
 ## Áudios
 As 40 narrações finais estão em `dist/assets/audio`, separadas nos mesmos cinco módulos do catálogo. Os arquivos são MP3 mono, 44,1 kHz e 128 kbps, gerados a partir dos WAV originais da Cartesia. O vínculo explícito entre cada história e seu áudio fica em `dist/story-catalog.js`.

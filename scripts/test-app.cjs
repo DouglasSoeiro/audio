@@ -12,6 +12,7 @@ audio.pause();run("startStory('noah')");assert.equal(run('current.id'),'noah');a
 const skipButton=seconds=>({dataset:{skip:String(seconds)},hasAttribute:name=>name==='data-skip',closest:selector=>selector==='button'?skipButton.current:null});
 for(const [start,seconds,expected] of [[30,15,45],[30,-15,15],[5,-15,0],[75,15,80]]){audio.duration=80;audio.currentTime=start;skipButton.current=skipButton(seconds);elements.app.listeners.click.forEach(fn=>fn({target:skipButton.current}));assert.equal(audio.currentTime,expected,`Skip ${seconds} must move playback and respect boundaries`)}
 audio.duration=Infinity;audio.currentTime=10;run('skipAudio(15)');assert.equal(audio.currentTime,25,'Skip must work while duration metadata is not finite');audio.duration=80;
+const seekInput={id:'',value:'50',hasAttribute:name=>name==='data-seek'};audio.currentTime=0;elements.app.listeners.input.forEach(fn=>fn({target:seekInput}));assert.equal(audio.currentTime,40,'Dragging the seek bar must move playback to the selected percentage');
 function emit(t){for(const cb of events[t]||[])cb()}
 audio.currentTime=77;emit('seeking');emit('timeupdate');assert.equal(run('journeyCount()'),0,'Seeking must not unlock');
 audio.currentTime=0;emit('seeking');for(let i=1;i<=72;i++){audio.currentTime=i;emit('timeupdate')}
@@ -33,4 +34,4 @@ for(const expected of ['dark','light','dark']){
  assert.equal(elements.app.innerHTML,appBefore);
  assert(themeToggle.innerHTML.includes('<svg'));
 }
-console.log('PASS: free listening, ordered journey progress, player controls, 15-second skips, seek protection, completion, duplicate protection, listening days, persistence, search, category, calendar and theme.');
+console.log('PASS: free listening, ordered journey progress, player controls, 15-second skips, draggable seek bar, seek protection, completion, duplicate protection, listening days, persistence, search, category, calendar and theme.');
